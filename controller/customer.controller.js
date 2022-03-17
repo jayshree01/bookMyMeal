@@ -2,7 +2,7 @@ const { request, response } = require("express");
 const Customer = require('../model/customer.model');
 const transporter = require('../mail/mail');
 
-const client = require('twilio')('AC8d3ddfa8db351b55246b1ed2d8df1bdc', 'eaedb28056ce169f41b7f37b61b96dda');
+const client = require('twilio')('AC8d3ddfa8db351b55246b1ed2d8df1bdc', 'e316f92f9d2a5a99bf743af50a3949cf');
 
 exports.sendOtp = (request, response, next) => {
     const email = request.params.email;

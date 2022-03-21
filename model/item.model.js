@@ -16,19 +16,7 @@ const itemSchema = new mongoose.Schema({
         required: true,
 
     },
-    itemUses: {
-        type: String,
-        required: true
-    },
-    itemDescription: {
-        type: String,
-        required: true
-    },
-    itemQty: {
-        type: Number,
-        required: true,
-        min: 1
-    },
+
     itemDiscount: {
         type: Number,
         default: 0

@@ -1,0 +1,43 @@
+http://localhost:3000/sendOtp/:email/:number/:name   (get)
+http://localhost:3000/ragistration     (post)
+customerName,customerNumber,customerPassword,customerEmail,sendOtp
+http://localhost:3000/signin      (post)
+customerEmail,customerPassword
+
+http://localhost:3000/category/add-category
+categoryImageUrl,categoryName
+
+http://localhost:3000/category/delete-category/:categoryId   (get)
+http://localhost:3000/category/view-category (get)
+http://localhost:3000/category/update-category        (post )
+categoryImageUrl,categoryName/oldImageUrl
+
+http://localhost:3000/item/add-item                (post)
+itemName,itemPrice,itemImageUrl,categoryId
+http://localhost:3000/item/update-item             (post)
+itemName,itemPrice,itemImageUrl/oldImageUrl,categoryId
+http://localhost:3000/item/delete-item/:itemId       (get)
+http://localhost:3000/item/view-item                 (get)
+http://localhost:3000/item/item-by-id/:itemId        (get)
+
+
+http://localhost:3000/package/add-package           (post)
+packageName,packageDescription,,packageImageUrl,item1,item2
+
+http://localhost:3000/package/update-package         (post)
+packageName,packageDescription,packageImageUrl,oldImageUrl
+
+http://localhost:3000/package/view-package              (get)
+http://localhost:3000/package/delete-package/:packageId   (get)
+http://localhost:3000/package/package-by-id/:packageId    (get)
+http://localhost:3000/package/add-item-package/:packageId/:itemId       (get)
+http://localhost:3000/package/remove-item-package/:packageId/:itemId      (get)
+
+
+
+http://localhost:3000/cart/add-item/:itemId       (get)
+http://localhost:3000/cart/add-package/:packageId    (get)
+http://localhost:3000/cart/remove-item/:itemId       (get)
+http://localhost:3000/cart/remove-package/:packageId   (get)
+
+

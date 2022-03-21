@@ -8,10 +8,6 @@ exports.addItem = (request, response, next) => {
     const item = new Item();
     item.itemName = request.body.itemName;
     item.itemPrice = request.body.itemPrice;
-    item.itemUses = request.body.itemUses;
-    item.itemDescription = request.body.itemDescription;
-    item.itemQty = request.body.itemQty;
-    item.itemDiscount = request.body.itemDiscount;
     item.categoryId = request.body.categoryId;
     item.itemImageUrl = "http://localhost:3000/images/" + request.file.filename;
     item.save()
@@ -41,14 +37,11 @@ exports.updateItem = (request, response, next) => {
     const errors = validationResult(request);
     if (!errors.isEmpty())
         return response.status(400).json({ errors: errors.array() });
-    let imageUrl = request.body.oldImageurl;
+    let imageUrl = request.body.oldImageUrl;
     if (request.file)
         imageUrl = "http://localhost:3000/images/" + request.file.filename;
     const itemName = request.body.itemName;
     const itemPrice = request.body.itemPrice;
-    const itemUses = request.body.itemUses;
-    const itemDescription = request.body.itemDescription;
-    const itemQty = request.body.itemQty;
     const itemDiscount = request.body.itemDiscount;
     const categoryId = request.body.categoryId;
     Item.updateOne({ _id: request.body.itemId }, {
@@ -56,10 +49,8 @@ exports.updateItem = (request, response, next) => {
                 itemName: itemName,
                 itemPrice: itemPrice,
                 itemImageUrl: imageUrl,
-                itemUses: itemUses,
-                itemDescription: itemDescription,
-                itemQty: itemQty,
-                itemDiscount: itemDiscount,
+              
+         
                 categoryId: categoryId,
 
 

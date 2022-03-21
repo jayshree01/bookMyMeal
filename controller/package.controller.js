@@ -9,7 +9,7 @@ exports.savePackage = (request, response, next) => {
     package.packageUses = request.body.packageUses;
     package.packageDescription = request.body.packageDescription;
     package.categoryId = request.body.categoryId;
-    package.packageImageUrl = "http://localhost:3000/images/" + request.file.filename;
+    package.packageImageUrl = "http://localhost:3000/images/"+ request.file.filename;
     package.items.push(request.body.item1);
     package.items.push(request.body.item2);
     package.save()

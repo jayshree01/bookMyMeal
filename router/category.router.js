@@ -13,7 +13,7 @@ var upload = multer({ storage: storage });
 router.post("/add-category", upload.single('categoryImageUrl'), body('categoryName').notEmpty(), categoryController.saveCategory);
 router.get("/delete-category/:categoryId", categoryController.deleteCategory);
 router.get("/view-category", categoryController.viewCategory);
-router.post("/update-category", upload.single('categoryImageUrl'), body('categoryName').notEmpty(), categoryController.updateCategory);
+router.post("/update-category", upload.single('categoryImageUrl'), categoryController.updateCategory);
 
 
 module.exports = router;

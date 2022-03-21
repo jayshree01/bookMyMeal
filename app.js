@@ -3,6 +3,7 @@ const client = require('twilio')('AC8d3ddfa8db351b55246b1ed2d8df1bdc', 'eaedb280
 const categoryRouter = require('./router/category.router');
 const itemRouter = require('./router/item.router');
 const packageRouter = require('./router/package.router');
+const cartRouter=require('./router/cart.router');
 
 
 const bodyParser = require('body-parser');
@@ -25,6 +26,7 @@ app.use(session({
     secret: 'Happyholi'
 }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use('/cart',cartRouter);
 app.use('/item', itemRouter);
 app.use('/package', packageRouter);
 app.use("/category", categoryRouter);

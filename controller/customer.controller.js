@@ -6,10 +6,11 @@ const client = require('twilio')('AC8d3ddfa8db351b55246b1ed2d8df1bdc', 'e316f92f
 
 exports.sendOtp = (request, response, next) => {
     const email = request.params.email;
-    const mobile="+91"+request.params.number
+    const mobile = "+91" + request.params.number
 
     request.session.otp = Math.floor((Math.random() * 10000) + 1);
-    const message="hello " + request.params.name + " Your One Time Password is :-" + request.session.otp;
+    const message = "hello " + request.params.name + " Your One Time Password is :-" + request.session.otp;
+    console.log(message);
     const mailData = {
         from: 'kushwahshailendra732@gmail.com',
         to: email,
@@ -17,13 +18,14 @@ exports.sendOtp = (request, response, next) => {
         text: message
 
     };
+
     function sendTextMessage() {
         client.messages.create({
-            body: message,
-            to: mobile*1,
-            from: +16292299782
+                body: message,
+                to: mobile * 1,
+                from: +16292299782
 
-        })
+            })
             .then(() => {
                 console.log("message Send")
             })
@@ -31,22 +33,23 @@ exports.sendOtp = (request, response, next) => {
                 console.log(err)
             })
     };
-   
-    sendTextMessage(); 
-   
-    transporter.sendMail(mailData, function (err, info) {
+
+    sendTextMessage();
+
+    transporter.sendMail(mailData, function(err, info) {
         if (err) {
             console.log(err)
             return response.status(500).json({ message: "error" });
 
-        }
-        else
+        } else
             return response.status(200).json({ message: "sucesss" })
     });
 
 
 };
 exports.ragistrationByOtp = (request, response, next) => {
+    console.log(request.session.otp)
+    console.log(request.body.otp)
     if (request.session.otp == request.body.otp) {
         const customer = new Customer();
         customer.customerName = request.body.customerName;
@@ -55,6 +58,7 @@ exports.ragistrationByOtp = (request, response, next) => {
         customer.customerPassword = request.body.customerPassword;
         customer.save()
             .then(result => {
+                request.session.otp = null;
                 return response.status(201).json(result);
             })
             .catch(err => {
@@ -62,24 +66,23 @@ exports.ragistrationByOtp = (request, response, next) => {
             });
 
 
-    }
-    else {
+    } else {
         return response.status(404).json({ message: "Otp Not Correct" });
     }
 };
-exports.customerSignIn=(request,response,next)=>{
+exports.customerSignIn = (request, response, next) => {
     Customer.findOne({
-      customerEmail:request.body.customerEmail,
-      customerPassword:request.body.customerPassword  
-    })
-    .then(result=>{
-        if(result)
-        return response.status(302).json(result);
-        else
-        return response.status(404).json({message:"User not found"})
-    })
-    .catch(err=>{
-        console.log(err)
-        return response.status(500).json({message:"Oops Something Went Wrong"});
-    })
+            customerEmail: request.body.customerEmail,
+            customerPassword: request.body.customerPassword
+        })
+        .then(result => {
+            if (result)
+                return response.status(302).json(result);
+            else
+                return response.status(404).json({ message: "User not found" })
+        })
+        .catch(err => {
+            console.log(err)
+            return response.status(500).json({ message: "Oops Something Went Wrong" });
+        })
 };

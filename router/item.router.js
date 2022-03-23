@@ -10,8 +10,8 @@ var storage = multer.diskStorage({
     }
 });
 var upload = multer({ storage: storage });
-router.post("/add-item", upload.single("itemImageUrl"), body('itemName').notEmpty(), body('itemPrice').isNumeric().notEmpty(), body('itemUses').notEmpty(), body('itemDescription').notEmpty(), body('itemQty').isNumeric().notEmpty(), body('itemDiscount').isNumeric().notEmpty(), body('categoryId').notEmpty(), itemController.addItem);
-router.post("/update-item", upload.single("itemImageUrl"), body('itemName').notEmpty(), body('itemPrice').isNumeric().notEmpty(), body('itemUses').notEmpty(), body('itemDescription').notEmpty(), body('itemQty').isNumeric().notEmpty(), body('itemDiscount').isNumeric().notEmpty(), body('categoryId').notEmpty(), itemController.updateItem);
+router.post("/add-item", upload.single("itemImageUrl"), itemController.addItem);
+router.post("/update-item", upload.single("itemImageUrl"), itemController.updateItem);
 router.get("/delete-item/:itemId", itemController.deleteItem);
 router.get("/view-item", itemController.viewItem);
 router.get("/item-by-id/:itemId", itemController.itemByid);

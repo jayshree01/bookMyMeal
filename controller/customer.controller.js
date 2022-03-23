@@ -76,11 +76,16 @@ exports.customerSignIn = (request, response, next) => {
             customerPassword: request.body.customerPassword
         })
         .then(result => {
-            request.session.customer=Customer._id;
-            console.log(Customer._id)
-            if (result)
+
+
+            if (result) {
+                console.log(result);
+                let id = result._id;
+
+                console.log(id);
+                request.session.customer = id;
                 return response.status(302).json(result);
-            else
+            } else
                 return response.status(204).json({ message: "User not found" })
         })
         .catch(err => {
